@@ -1,14 +1,5 @@
 from dotenv import load_dotenv
-
 load_dotenv()
-import base64
-import streamlit as st
-import os
-import io
-from PIL import Image 
-import pdf2image
-import google.generativeai as genai
-
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 def get_gemini_response(input,pdf_cotent,prompt):
@@ -18,16 +9,6 @@ def get_gemini_response(input,pdf_cotent,prompt):
 
 def input_pdf_setup(uploaded_file):
     if uploaded_file is not None:
-        ## Convert the PDF to image
-        images=pdf2image.convert_from_bytes(uploaded_file.read())
-
-        first_page=images[0]
-
-        # Convert to bytes
-        img_byte_arr = io.BytesIO()
-        first_page.save(img_byte_arr, format='JPEG')
-        img_byte_arr = img_byte_arr.getvalue()
-
         pdf_parts = [
             {
                 "mime_type": "image/jpeg",
@@ -91,23 +72,6 @@ with col1:
 
 with col2:
     submit2 = st.button("Percentage match")
-
-
-input_prompt1 = """
- You are an experienced Technical Human Resource Manager,your task is to review the provided resume against the job description. 
-  Please share your professional evaluation on whether the candidate's profile aligns with the role. 
- Highlight the strengths and weaknesses of the applicant in relation to the specified job requirements.
-"""
-
-input_prompt2 = """
-You are a professional-grade ATS (Applicant Tracking System) scanner designed to evaluate resumes with precision. 
-Your task is to thoroughly examine the given resume **in detail**, comparing **every line and section** against the provided job description.
-Provide the output: 
-Match Percentage — Indicate how well the resume matches the job description.
-Overall — In 1 or 2 lines, briefly summarize the overall alignment 
-
-Do not list keywords, suggestions, or bullet points. Be concise and ATS-accurate.
-"""
 
 if submit1:
     if uploaded_file is not None:
