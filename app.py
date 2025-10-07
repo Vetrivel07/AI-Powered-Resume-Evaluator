@@ -1,14 +1,9 @@
-<<<<<<< HEAD
-from dotenv import load_dotenv
-load_dotenv()
-=======
 from dotenv import load_dotenv; load_dotenv()
 import os, json, time
 import streamlit as st
 import google.generativeai as genai
 
 MODEL_ID = "gemini-2.5-flash"
->>>>>>> 85f87bd (new commit)
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 ATS_SCHEMA_EXAMPLE = {
@@ -21,19 +16,6 @@ ATS_SCHEMA_EXAMPLE = {
   "additionalProperties": False
 }
 
-<<<<<<< HEAD
-def input_pdf_setup(uploaded_file):
-    if uploaded_file is not None:
-        pdf_parts = [
-            {
-                "mime_type": "image/jpeg",
-                "data": base64.b64encode(img_byte_arr).decode()  # encode to base64
-            }
-        ]
-        return pdf_parts
-    else:
-        raise FileNotFoundError("No file uploaded")
-=======
 HR_PROMPT = (
   "Role: You are an experienced technical recruiter.\n"
   "Task: Evaluate the resume against the job description.\n"
@@ -69,7 +51,6 @@ def upload_pdf_native(uploaded_file):
         mime_type="application/pdf",
         display_name=uploaded_file.name
     )
->>>>>>> 85f87bd (new commit)
 
 def call_gemini(content_parts):
     """One retry wrapper."""
@@ -95,6 +76,44 @@ def parse_json(text: str):
         
 # ---------- UI
 st.set_page_config(page_title="AI-Powered Resume Evaluator")
+
+# ---- Streamlit CSS injection (paste once) ----
+st.markdown("""
+<style>
+/* App background and content width */
+.block-container { max-width: 800px; padding-top: 20px; }
+
+/* Headings */
+h1, h2, h3 { color:#2c3e50; }
+
+/* Labels (approximate) */
+label, .stTextArea label, .stFileUploader label { font-weight:600; color:#34495e; }
+
+/* Textarea */
+.stTextArea textarea {
+  width:100%; padding:12px; border:1px solid #ccd1d9; border-radius:6px;
+  font-size:14px; resize:vertical;
+}
+
+/* File uploader */
+.stFileUploader div[data-testid="stFileUploadDropzone"] {
+  border:1px solid #ccd1d9; border-radius:6px; background:#fff;
+}
+
+/* Buttons */
+.stButton > button {
+  background:#1e90ff; color:#fff; padding:10px 20px; border:0; border-radius:6px;
+  transition:background-color .3s ease; font-size:14px;
+}
+.stButton > button:hover { background:#0d6efd; }
+
+/* “Result box” style helper */
+.result-box {
+  margin-top: 20px; padding: 16px; background:#ecf0f1; border-left:6px solid #3498db; border-radius:6px;
+}
+</style>
+""", unsafe_allow_html=True)
+
 st.header("AI-Powered Resume Evaluator")
 
 uploaded = st.file_uploader("Upload Resume (PDF)", type=["pdf"])
@@ -105,25 +124,9 @@ ats_btn = c2.button("Percentage match")
 
 if uploaded: st.caption("PDF uploaded successfully.")
 
-<<<<<<< HEAD
-col1, col2 = st.columns(2)
-with col1:
-    submit1 = st.button("Tell Me About the Resume")
-
-with col2:
-    submit2 = st.button("Percentage match")
-
-if submit1:
-    if uploaded_file is not None:
-        pdf_content=input_pdf_setup(uploaded_file)
-        response=get_gemini_response(input_prompt1,pdf_content,input_text)
-        st.subheader("The Repsonse is")
-        st.write(response)
-=======
 if hr_btn or ats_btn:
     if not uploaded or not jd_text.strip():
         st.error("Upload a PDF and paste a job description.")
->>>>>>> 85f87bd (new commit)
     else:
         # Upload PDF to Gemini
         file_handle = upload_pdf_native(uploaded)

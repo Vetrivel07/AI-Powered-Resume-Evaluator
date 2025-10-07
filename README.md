@@ -7,17 +7,17 @@ The app provides a detailed report including job expectations, resume alignment,
 
 ## 🚀 Features
 
-📄 Upload PDF resume and paste job description
-🧠 Uses Gemini Flash 2.5 for multimodal reasoning (reads PDFs directly)
-🧾 Returns 4-section detailed report
+- 📄 Upload PDF resume and paste job description
+- 🧠 Uses Gemini Flash 2.5 for multimodal reasoning (reads PDFs directly)
+- 🧾 Returns 4-section detailed report
     - About the Job
     - Your Resume
     - Match Percentage
     - Summary & Feedback
-🔍 Emphasizes experience, skills, and projects
-🔒 Automatically deletes uploaded files after analysis
-🎨 Includes custom CSS styling and inline colored “loading” indicator
-⚡ Lightweight, single-file deployable Streamlit app
+- 🔍 Emphasizes experience, skills, and projects
+- 🔒 Automatically deletes uploaded files after analysis
+- 🎨 Includes custom CSS styling and inline colored “loading” indicator
+- ⚡ Lightweight, single-file deployable Streamlit app
 
 
 ## 📦 Tech Stack
@@ -51,13 +51,13 @@ User
  ├── Parse JSON → Show 4 Sections
  ├── Delete Uploaded File
  ▼
-Result: ATS-style evaluation on screen
+Result: ATS-style evaluation
 
 ```
 
 ## 📸 Screenshots
 
-![Index](static/index.png)
+![Index](static/Index.png)
 
 ## ⚙️ Environment Setup
 
