@@ -1,41 +1,81 @@
 # AI-Powered Resume Evaluator
 
-This project is an AI-powered Resume Evaluator that analyzes how well a resume aligns with a given job description. Leveraging natural language processing (NLP), semantic embeddings, and dynamic keyword extraction, it simulates the behavior of modern ATS platforms to deliver a comprehensive match score. The system helps both job seekers and recruiters assess fit with precision, beyond simple keyword matching.
+The AI-Powered Resume Evaluator automatically reviews a candidate’s resume (PDF) against a given job description using Google Gemini 2.5 Flash.
+It simulates both a human recruiter and an Applicant Tracking System (ATS) to evaluate how well a resume matches the job role.
+The app provides a detailed report including job expectations, resume alignment, match percentage, and professional feedback — all in real time through a clean Streamlit web interface.
 
 
 ## 🚀 Features
 
-📄 **Resume Upload & Parsing** using Streamlit file uploader <br>
-🖼️ **PDF-to-Image Conversion** for Gemini's multimodal input <br>
-🤖 **Gemini 1.5 Flash Integration** for AI-powered resume evaluation <br>
-📝 **Custom Prompting** to drive HR-style or ATS-style assessments <br>
-📊 **ATS-Style** Match Scoring with percentage and summary output <br>
-⚡ Real-Time Feedback delivered through a responsive **Streamlit** UI <br>
+📄 Upload PDF resume and paste job description
+🧠 Uses Gemini Flash 2.5 for multimodal reasoning (reads PDFs directly)
+🧾 Returns 4-section detailed report
+    - About the Job
+    - Your Resume
+    - Match Percentage
+    - Summary & Feedback
+🔍 Emphasizes experience, skills, and projects
+🔒 Automatically deletes uploaded files after analysis
+🎨 Includes custom CSS styling and inline colored “loading” indicator
+⚡ Lightweight, single-file deployable Streamlit app
 
 
 ## 📦 Tech Stack
 
-- **Python** — Core backend language
-- **Streamlit** — Web application framework for UI
-- **Google Gemini 1.5 Flash** — AI model for resume evaluation
-- **Google Generative AI API** — LLM integration
+| Layer                | Technology              | Purpose                             |
+| -------------------- | ----------------------- | ----------------------------------- |
+| **Frontend / UI**    | Streamlit               | Interactive web interface           |
+| **Backend / Logic**  | Python 3.9+             | Workflow and LLM orchestration      |
+| **LLM Engine**       | Google Gemini 2.5 Flash | Core multimodal model (text + PDF)  |
+| **Environment Mgmt** | python-dotenv           | Secure API-key handling             |
+| **Styling**          | Custom CSS              | UI consistency and branding         |
+| **Optional Libs**    | pillow, pdf2image       | Image/PDF preprocessing (if needed) |
+
 
 
 ## 📁 Project Structure
 
 ```
-/project-root/
-│
-├── .env
-├── app.py
-├── requirements.txt
-└── README.md
+User
+ ├── Upload Resume (PDF)
+ ├── Paste Job Description
+ ▼
+[ Streamlit UI ]
+ ├── Build Prompt + PDF Handle
+ ▼
+[ Gemini Flash Model ]
+ ├── Compare Resume ↔ JD
+ ├── Generate JSON Output
+ ▼
+[ Streamlit Renderer ]
+ ├── Parse JSON → Show 4 Sections
+ ├── Delete Uploaded File
+ ▼
+Result: ATS-style evaluation on screen
+
 ```
 
 ## 📸 Screenshots
 
-![Index](static/Index.png)
+![Index](static/index.png)
 
+## ⚙️ Environment Setup
+
+### Create Virtual Environment
+```
+python -m venv venv
+source venv/bin/activate      # (Windows: venv\Scripts\activate)
+```
+
+### Install Dependencies
+```
+pip install streamlit google-generativeai python-dotenv pillow pdf2image
+```
+
+### Run the App
+```
+streamlit run app.py
+```
 
 ## Author
 
